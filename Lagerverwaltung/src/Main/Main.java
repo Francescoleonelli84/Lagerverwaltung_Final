@@ -8,9 +8,12 @@ import View.ProductPanel;
 public class Main {
 	
 		public static void main(String[] args) {
+			
+			
 			JFrame drawFrame = new JFrame("Warehouse Management System");
 			drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			//drawFrame.getContentPane().add(new LoginPanel(drawFrame));
+			System.out.println("Test");
 			drawFrame.getContentPane().add(new ProductPanel(drawFrame));
 			drawFrame.setResizable(false);
 			drawFrame.setLocationRelativeTo(null);
