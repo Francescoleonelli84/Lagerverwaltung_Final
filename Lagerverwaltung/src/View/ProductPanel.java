@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.ProductController;
 import DAO.DaoImpl;
+import Model.ProductTableModel;
 
 public class ProductPanel extends JPanel{
 	
@@ -60,7 +61,7 @@ public class ProductPanel extends JPanel{
 	public ImageIcon ProductPicture;
 	public static JTable ProductTable;
 	private JScrollPane scrollPane;
-	
+	private DefaultTableModel dt;
 
 	
 	public ProductPanel(JFrame myFrame) {
@@ -151,19 +152,22 @@ public class ProductPanel extends JPanel{
 		btnDelete.addActionListener(new ProductController(this, myFrame));
 		Panel.add(btnDelete);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 242, 842, 193);
-		add(scrollPane);
+//		scrollPane = new JScrollPane();
+//		scrollPane.setBounds(21, 242, 842, 193);
+//		add(scrollPane);
+//
+//		ProductTable = new JTable();
+//		ProductTable.setBackground(Color.LIGHT_GRAY);
+//		scrollPane.setViewportView(ProductTable);
+//		ProductTable.addMouseListener(new ProductController(this, myFrame));
+//		ProductTable.setModel(new DefaultTableModel(new Object[][] {
+//
+//		}, new String[] { "Product_ID", "Product_Name", "Purchase_Price", "Selling_Price", "Quantity", "Description", "Picture" }));
 
-		ProductTable = new JTable();
-		ProductTable.setBackground(Color.LIGHT_GRAY);
-		scrollPane.setViewportView(ProductTable);
-		ProductTable.addMouseListener(new ProductController(this, myFrame));
-		ProductTable.setModel(new DefaultTableModel(new Object[][] {
+		
+		//add table direct from JTable_Model_Class 
 
-		}, new String[] { "Product_ID", "Product_Name", "Purchase_Price", "Selling_Price", "Quantity", "Description", "Picture" }));
-
-		DaoImpl dao = new DaoImpl();
+		add(new ProductTableModel(this).addTable());
 		
 		
 		btnHome = new JButton("Home");
@@ -212,7 +216,14 @@ public class ProductPanel extends JPanel{
 	public void setLblProductPicture(JLabel lblProductPicture) {
 		this.lblProductPicture = lblProductPicture;
 	}
-	
+
+
+	public DefaultTableModel getDt() {
+		return dt;
+	}
+
+
+
 	
 	
 

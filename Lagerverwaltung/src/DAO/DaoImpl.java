@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
+
+import com.mysql.cj.xdevapi.Statement;
 
 import Controller.ProductController;
 import Ds.DsSingleton;
@@ -28,7 +31,8 @@ public class DaoImpl implements DAO {
 	public boolean validateUser(User user) {
 
 		try {
-			ps = con.prepareStatement("Select * From Users Where username='" + user.getUsername() + "' AND password ='" + user.getPassword() + "'");
+			ps = con.prepareStatement("Select * From Users Where username='" + user.getUsername() + "' AND password ='"
+					+ user.getPassword() + "'");
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -41,7 +45,7 @@ public class DaoImpl implements DAO {
 		}
 		return false;
 	}
-	
+
 	public boolean checkCustomerDuplicate(Customer customer) {
 
 		try {
@@ -59,57 +63,58 @@ public class DaoImpl implements DAO {
 		}
 		return false;
 	}
-	
-	public void addCustomer(Customer customer) {
-		
-		try {
-		ps = con.prepareStatement("Insert into customer (customer_name, email, phone, credit_rating, address)values(?,?,?,?,?) ");
-		ps.setString(1, customer.getCustomer_name());
-		ps.setString(2, customer.getEmail());
-		ps.setString(3, customer.getPhone());
-		ps.setInt(4, customer.getCredit_rating());
-		ps.setString(5, customer.getAddress());	
 
-		ps.executeUpdate();
-		
-		}catch (SQLException e) {
+	public void addCustomer(Customer customer) {
+
+		try {
+			ps = con.prepareStatement(
+					"Insert into customer (customer_name, email, phone, credit_rating, address)values(?,?,?,?,?) ");
+			ps.setString(1, customer.getCustomer_name());
+			ps.setString(2, customer.getEmail());
+			ps.setString(3, customer.getPhone());
+			ps.setInt(4, customer.getCredit_rating());
+			ps.setString(5, customer.getAddress());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateCustomer(Customer customer) {
-		
+
 		try {
-			ps = con.prepareStatement("update customer set customer_name=?, email=?, phone=?, credit_rating=?, address=? where customer_id=?");
-			ps.setString(1,  customer.getCustomer_name());
+			ps = con.prepareStatement(
+					"update customer set customer_name=?, email=?, phone=?, credit_rating=?, address=? where customer_id=?");
+			ps.setString(1, customer.getCustomer_name());
 			ps.setString(2, customer.getEmail());
-			ps.setString(3,customer.getPhone());
+			ps.setString(3, customer.getPhone());
 			ps.setInt(4, customer.getCredit_rating());
 			ps.setString(5, customer.getAddress());
 			ps.setInt(6, customer.getCustomer_id());
 
 			ps.executeUpdate();
-		
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
+
 	}
-	
+
 	public void deleteCustomer(Customer customer) {
-		
+
 		try {
 			ps = con.prepareStatement("Delete from customer where customer_id = ?");
 			ps.setInt(1, customer.getCustomer_id());
 			ps.executeUpdate();
-		
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 	public boolean checkProductDuplicate(Product product) {
 
 //		try {
@@ -127,11 +132,12 @@ public class DaoImpl implements DAO {
 //		}
 		return false;
 	}
-	
+
 	public void addProduct(Product product) {
 		try {
 			InputStream picture = new FileInputStream(new File(ProductController.s));
-			ps = con.prepareStatement("Insert into product (product_name, purchase_price, selling_price, quantity, description, picture)values(?,?,?,?,?,?) ");
+			ps = con.prepareStatement(
+					"Insert into product (product_name, purchase_price, selling_price, quantity, description, picture)values(?,?,?,?,?,?) ");
 			ps.setString(1, product.getProduct_name());
 			ps.setDouble(2, product.getPurchase_price());
 			ps.setDouble(3, product.getSelling_price());
@@ -139,83 +145,71 @@ public class DaoImpl implements DAO {
 			ps.setString(5, product.getDecription());
 			ps.setBlob(6, picture);
 			ps.executeUpdate();
-			
-			}catch (SQLException e) {
-				e.printStackTrace();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-		
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	public void updateProduct(Product product) {
 		try {
-			ps = con.prepareStatement("update product set product_name=?, purchase_price=?, selling_price=?, description=?, quantity=? where product_id=?");
-			ps.setString(1,  product.getProduct_name());
-			ps.setDouble(2,product.getPurchase_price());
+			ps = con.prepareStatement(
+					"update product set product_name=?, purchase_price=?, selling_price=?, description=?, quantity=? where product_id=?");
+			ps.setString(1, product.getProduct_name());
+			ps.setDouble(2, product.getPurchase_price());
 			ps.setDouble(3, product.getSelling_price());
 			ps.setString(4, product.getDecription());
 			ps.setInt(5, product.getQuantity());
 			ps.setInt(6, product.getProduct_id());
-			
+
 			ps.executeUpdate();
-			
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}		
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void deleteProduct(Product product) {
 		try {
 			ps = con.prepareStatement("Delete from product where product_id = ?");
 			ps.setInt(1, product.getProduct_id());
 			ps.executeUpdate();
-			
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}		
-	}
 
-	
-	public void productTableUpdate () {
-		int c;
-	
-		try {
-			ps = con.prepareStatement("select * from product");
-			ResultSet rs = ps.executeQuery();
-
-			java.sql.ResultSetMetaData rsd = rs.getMetaData();
-			c = rsd.getColumnCount();
-
-			DefaultTableModel d = (DefaultTableModel) ProductPanel.ProductTable.getModel();
-			d.setRowCount(0);
-
-			while (rs.next()) {
-				Vector v2 = new Vector();
-
-				for (int i = 1; i <= c; i++) {
-
-					v2.add(rs.getInt("product_id"));
-					v2.add(rs.getString("product_name"));
-					v2.add(rs.getString("purchase_price"));
-					v2.add(rs.getString("selling_price"));
-					v2.add(rs.getInt("quantity"));
-					v2.add(rs.getString("description"));
-					v2.add(rs.getBytes("picture"));
-					
-				}
-				d.addRow(v2);
-			
-				
-			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	
-}
-	
 
+	public ArrayList<Product> getAllProducts() throws SQLException { // Event event im Konstruktor
+
+
+		try {
+			
+			ArrayList<Product> ret = new ArrayList<Product>();
+			ps = con.prepareStatement("SELECT * FROM Product ORDER BY productid ASC");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int productId = rs.getInt("productid");
+				String productName = rs.getString("product_name");
+				double purchasePrice = rs.getDouble("purchase_price");
+				double sellingPrice = rs.getDouble("selling_price");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				byte[] picture = rs.getBytes("picture");
+				Product p = new Product(productId, productName, purchasePrice, sellingPrice, quantity, description, picture);
+				ret.add(p);
+
+			}
+			return ret;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

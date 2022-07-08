@@ -52,6 +52,7 @@ public class ProductController implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Add")) {
 			
+			
 			String product_name = ProductPanel.txtProductName.getText();
 			double purchase_price =  Double.parseDouble(ProductPanel.txtPurchasePrice.getText());
 			double selling_price =  Double.parseDouble(ProductPanel.txtSellingPrice.getText());

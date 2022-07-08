@@ -1,6 +1,10 @@
 package DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import javax.swing.table.DefaultTableModel;
 
 import Model.Customer;
 import Model.Product;
@@ -25,7 +29,7 @@ public interface DAO {
 	
 	public void deleteProduct(Product product)throws SQLException;
 
-	public void productTableUpdate(Product product);
+	public ArrayList<Product> getAllProducts() throws SQLException;
 	
 	
 	
