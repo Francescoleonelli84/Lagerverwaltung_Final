@@ -52,6 +52,7 @@ public class CustomerController implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getActionCommand().equals("Add")) {
 			
 			String customer_name = CustomerPanel.txtCustomertName.getText();
@@ -59,19 +60,17 @@ public class CustomerController implements ActionListener{
 			String email = CustomerPanel.txtEmail.getText();
 			String phone = CustomerPanel.txtPhone.getText();
 			int credit_rating = Integer.parseInt(String.valueOf(CustomerPanel.txtCreditRating.getSelectedItem()));
-
-	
+			
 			try {
 					Customer customer = new Customer(customer_name, email, phone, credit_rating, address);
 					daoImpl.addCustomer(customer);
-					JOptionPane.showMessageDialog(null, "Customer added!", "Add Customer", JOptionPane.INFORMATION_MESSAGE);		
-			
+					JOptionPane.showMessageDialog(null, "Customer added!", "Add Customer", JOptionPane.INFORMATION_MESSAGE);			
 
 			}catch (Exception e1) {
 				e1.printStackTrace();
 						
 			}
-			
+					
 					
 		}else if (e.getActionCommand().equals("Update")) {
 			
@@ -83,8 +82,10 @@ public class CustomerController implements ActionListener{
 			
 		} else if (e.getActionCommand().equals("Reset")) {
 			
-			LoginPanel.txtUsername.setText(null);
-			LoginPanel.passInput.setText(null);
+			CustomerPanel.txtCustomertName.setText(null);
+			CustomerPanel.txtPhone.setText(null);
+			CustomerPanel.txtEmail.setText(null);
+			CustomerPanel.txtAddress.setText(null);				
 			
 		} else if (e.getActionCommand().equals("Exit")) {
 

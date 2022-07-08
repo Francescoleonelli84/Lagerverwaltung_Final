@@ -30,7 +30,7 @@ public interface DAO {
 	public ArrayList<Product> getAllProducts() throws SQLException;
 	
 	
-	
+	public ArrayList<Customer> getAllCustomers() throws SQLException;
 	
 	
 	

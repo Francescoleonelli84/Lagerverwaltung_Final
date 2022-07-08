@@ -77,12 +77,6 @@ public class ProductController implements ActionListener, MouseListener{
 			
 			
 			
-		} else if (e.getActionCommand().equals("Reset")) {
-			
-			LoginPanel.txtUsername.setText(null);
-			LoginPanel.passInput.setText(null);
-			
-			
 	    }else if (e.getActionCommand().equals("Upload")) {
 	    	 JFileChooser fileChooser = new JFileChooser();
 	         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));

@@ -176,6 +176,33 @@ public class DaoImpl implements DAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	
+	return null;
+	}
+
+     	public ArrayList<Customer> getAllCustomers() throws SQLException {
+
+		try {
+			
+			ArrayList<Customer> ret = new ArrayList<Customer>();
+			ps = con.prepareStatement("SELECT * FROM Customer ORDER BY customer_id ASC");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int customer_id = rs.getInt("customer_id");
+				String customer_name = rs.getString("customer_name");
+				String email = rs.getString("email");
+				String phone = rs.getString("phone");
+				int credit_rating = rs.getInt("credit_rating");
+				String address = rs.getString("address");
+				Customer c = new Customer(customer_id, customer_name, email, phone, credit_rating, address);
+				ret.add(c);
+
+			}
+			return ret;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
