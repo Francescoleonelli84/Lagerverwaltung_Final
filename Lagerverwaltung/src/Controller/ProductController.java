@@ -52,25 +52,18 @@ public class ProductController implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Add")) {
 			
-			
+			try{
 			String product_name = ProductPanel.txtProductName.getText();
 			double purchase_price =  Double.parseDouble(ProductPanel.txtPurchasePrice.getText());
 			double selling_price =  Double.parseDouble(ProductPanel.txtSellingPrice.getText());
 	        int quantity = Integer.parseInt(ProductPanel.txtQuantity.getText());
 			String description =  ProductPanel.txtDescription.getText();
+
+                        Product product = new Product(product_name, purchase_price, selling_price, quantity, description);
+			daoImpl.addProduct(product);
+			JOptionPane.showMessageDialog(null, "Product added!", "Add Product", JOptionPane.INFORMATION_MESSAGE);	
 			
-//			String password = String.valueOf(loginPanel.passwordField.getPassword());
-			
-			try {
-				if(daoImpl.checkProductDuplicate(product)) {
-					
-					JOptionPane.showMessageDialog(null, "Product already exists ", "Error", JOptionPane.ERROR_MESSAGE);
-					
-				}else {
-					Product product = new Product(product_name, purchase_price, selling_price,  quantity, description);
-					daoImpl.addProduct(product);
-					JOptionPane.showMessageDialog(null, "Product added!", "Add Product", JOptionPane.INFORMATION_MESSAGE);		
-				}
+
 
 			}catch (Exception e1) {
 				e1.printStackTrace();
@@ -99,7 +92,7 @@ public class ProductController implements ActionListener, MouseListener{
 	         if(result == JFileChooser.APPROVE_OPTION){
 	             selectedFile = fileChooser.getSelectedFile();
 	             String path = selectedFile.getAbsolutePath();
-	             ProductPanel.getLblProductPicture().setIcon(ResizeImage(path));
+	             ProductPanel.lblProductPicture.setIcon(ResizeImage(path));
 	             setS(path);
 	              }
 	         else if(result == JFileChooser.CANCEL_OPTION){

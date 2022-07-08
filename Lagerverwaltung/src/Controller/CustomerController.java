@@ -59,17 +59,13 @@ public class CustomerController implements ActionListener{
 			String email = CustomerPanel.txtEmail.getText();
 			String phone = CustomerPanel.txtPhone.getText();
 			int credit_rating = Integer.parseInt(String.valueOf(CustomerPanel.txtCreditRating.getSelectedItem()));
-			
+
+	
 			try {
-				if(daoImpl.checkCustomerDuplicate(customer)) {
-					
-					JOptionPane.showMessageDialog(null, "Customer already exists ", "Error", JOptionPane.ERROR_MESSAGE);
-					
-				}else {
 					Customer customer = new Customer(customer_name, email, phone, credit_rating, address);
 					daoImpl.addCustomer(customer);
 					JOptionPane.showMessageDialog(null, "Customer added!", "Add Customer", JOptionPane.INFORMATION_MESSAGE);		
-				}
+			
 
 			}catch (Exception e1) {
 				e1.printStackTrace();

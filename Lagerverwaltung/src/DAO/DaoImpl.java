@@ -28,7 +28,7 @@ public class DaoImpl implements DAO {
 	Connection con = DsSingleton.getConnection();
 	PreparedStatement ps = null;
 
-	public boolean validateUser(User user) {
+	public boolean validateUser(User user) throws SQLException{
 
 		try {
 			ps = con.prepareStatement("Select * From Users Where username='" + user.getUsername() + "' AND password ='"
@@ -46,25 +46,9 @@ public class DaoImpl implements DAO {
 		return false;
 	}
 
-	public boolean checkCustomerDuplicate(Customer customer) {
+	
 
-		try {
-			ps = con.prepareStatement("Select * From Customer Where username='" + customer.getCustomer_name() + "'");
-			ResultSet rs = ps.executeQuery();
-
-			if (rs != null) {
-				while (rs.next()) {
-					return true;
-				}
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	public void addCustomer(Customer customer) {
+	public void addCustomer(Customer customer) throws SQLException{
 
 		try {
 			ps = con.prepareStatement(
@@ -82,7 +66,7 @@ public class DaoImpl implements DAO {
 		}
 	}
 
-	public void updateCustomer(Customer customer) {
+	public void updateCustomer(Customer customer) throws SQLException{
 
 		try {
 			ps = con.prepareStatement(
@@ -102,7 +86,7 @@ public class DaoImpl implements DAO {
 
 	}
 
-	public void deleteCustomer(Customer customer) {
+	public void deleteCustomer(Customer customer)throws SQLException {
 
 		try {
 			ps = con.prepareStatement("Delete from customer where customer_id = ?");
@@ -115,25 +99,8 @@ public class DaoImpl implements DAO {
 
 	}
 
-	public boolean checkProductDuplicate(Product product) {
 
-//		try {
-//			ps = con.prepareStatement("Select * From product Where product_name='" + product.getProduct_name() + "'");
-//			ResultSet rs = ps.executeQuery();
-//
-//			if (rs != null) {
-//				while (rs.next()) {
-//					return true;
-//				}
-//			}
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-		return false;
-	}
-
-	public void addProduct(Product product) {
+	public void addProduct(Product product) throws SQLException{
 		try {
 			InputStream picture = new FileInputStream(new File(ProductController.s));
 			ps = con.prepareStatement(
@@ -155,7 +122,7 @@ public class DaoImpl implements DAO {
 
 	}
 
-	public void updateProduct(Product product) {
+	public void updateProduct(Product product) throws SQLException{
 		try {
 			ps = con.prepareStatement(
 					"update product set product_name=?, purchase_price=?, selling_price=?, description=?, quantity=? where product_id=?");
@@ -173,7 +140,7 @@ public class DaoImpl implements DAO {
 		}
 	}
 
-	public void deleteProduct(Product product) {
+	public void deleteProduct(Product product) throws SQLException{
 		try {
 			ps = con.prepareStatement("Delete from product where product_id = ?");
 			ps.setInt(1, product.getProduct_id());

@@ -147,9 +147,10 @@ public class ProductPanel extends JPanel{
 		Panel.add(btnUpdate);
 
 		btnDelete = new JButton("Delete");
-		btnDelete.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		btnDelete.setForeground(new Color(0, 128, 128));
+		btnDelete.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		btnDelete.addActionListener(new ProductController(this, myFrame));
+		btnDelete.setBounds(328, 149, 117, 29);
 		Panel.add(btnDelete);
 		
 //		scrollPane = new JScrollPane();
@@ -190,13 +191,21 @@ public class ProductPanel extends JPanel{
 		btnUploadPicture.addActionListener(new ProductController(this, myFrame));
 		btnUploadPicture.setBounds(599, 200, 117, 29);
 		add(btnUploadPicture);
+
+                lblProductPicture = new JLabel();
+		lblProductPicture.setBackground(new Color(192, 192, 192));
+		lblProductPicture.setBounds(613, 12, 250, 180);
+		ProductPicture = new ImageIcon(new ImageIcon("default_image.png").getImage().getScaledInstance(250, 180, Image.SCALE_SMOOTH));
+		lblProductPicture.setIcon(ProductPicture);
+		add(lblProductPicture);
 		
-		setLblProductPicture(new JLabel());
-		getLblProductPicture().setBackground(new Color(192, 192, 192));
-		getLblProductPicture().setBounds(613, 12, 250, 180);
-		ProductPicture = new ImageIcon(new ImageIcon("src/default_image.png").getImage().getScaledInstance(250, 180, Image.SCALE_SMOOTH));
-		getLblProductPicture().setIcon(ProductPicture);
-		add(getLblProductPicture());
+//		setLblProductPicture(new JLabel());
+	//	getLblProductPicture().setBackground(new Color(192, 192, 192));
+//		getLblProductPicture().setBounds(613, 12, 250, 180);
+//		ProductPicture = new ImageIcon(new ImageIcon("src/default_image.png").getImage().getScaledInstance(250, 180, 
+//Image.SCALE_SMOOTH));
+	//	getLblProductPicture().setIcon(ProductPicture);
+//		add(getLblProductPicture());
 		
 		btnDisplayPicture = new JButton("Display Picture");
 		btnDisplayPicture.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -208,14 +217,14 @@ public class ProductPanel extends JPanel{
 	}
 
 
-	public static JLabel getLblProductPicture() {
-		return lblProductPicture;
-	}
+//	public static JLabel getLblProductPicture() {
+//		return lblProductPicture;
+//	}
 
 
-	public void setLblProductPicture(JLabel lblProductPicture) {
-		this.lblProductPicture = lblProductPicture;
-	}
+//	public void setLblProductPicture(JLabel lblProductPicture) {
+//		this.lblProductPicture = lblProductPicture;
+//	}
 
 
 	public DefaultTableModel getDt() {

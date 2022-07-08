@@ -13,9 +13,7 @@ import Model.User;
 public interface DAO {
 	
 	
-	public boolean validateUser(User user)throws SQLException;
-
-	public boolean checkCustomerDuplicate(Customer customer)throws SQLException;
+        public boolean validateUser(User user)throws SQLException;
 	
 	public void addCustomer(Customer customer)throws SQLException;
 	
