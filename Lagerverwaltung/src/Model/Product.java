@@ -113,7 +113,11 @@ public class Product {
 				+ quantity + ", product_picture=" + product_picture + "]";
 	}
 	
-	
+	public String toString1() {
+		return "Product [product_name=" + product_name + ", product_id=" + product_id + ", purchase_price="
+				+ purchase_price + ", selling_price=" + selling_price + ",quantity="
+				+ quantity + "]";
+	}
 	
 	
 	
