@@ -50,14 +50,14 @@ public InventoryPanel(JFrame myFrame) {
 		InventoryPanel.add(Panel);
 		Panel.setLayout(null);
 		
-		btnHome = new JButton("HOME");
+		btnHome = new JButton("Home");
 		btnHome.addActionListener(new InventoryController(this, myFrame));
 		btnHome.setForeground(new Color(0, 128, 128));
 		btnHome.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		btnHome.setBounds(500, 47, 125, 35);
 		Panel.add(btnHome);
 		
-		btnExit = new JButton("EXIT");
+		btnExit = new JButton("Exit");
 		btnExit.addActionListener(new InventoryController(this, myFrame));
 		btnExit.setForeground(new Color(0, 128, 128));
 		btnExit.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -71,21 +71,7 @@ public InventoryPanel(JFrame myFrame) {
 		btnExport2Pdf.setBounds(164, 41, 172, 45);
 		Panel.add(btnExport2Pdf);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 177, 868, 309);
-		add(scrollPane);
-		
-		StockTable = new JTable();
-		StockTable.setBackground(new Color(192, 192, 192));
-		scrollPane.setViewportView(StockTable);
-		
-		StockTable.setModel(new DefaultTableModel(new Object[][] {
-
-		}, new String[] { "Product_ID", "Product_Name", "Purchase_Price", "Selling_Price", "Quantity"}));
-		
-		
-		
-}
+		add(new InventoryTableModel(this).addTable());
 	
 	
 

@@ -205,5 +205,32 @@ public class DaoImpl implements DAO {
 		}
 		return null;
 	}
+      
+
+      public ArrayList<Product> getProductsInStock() throws SQLException { // Event event im Konstruktor
+
+		try {
+			
+			ArrayList<Product> ret = new ArrayList<Product>();
+			ps = con.prepareStatement("SELECT * FROM Product ORDER BY product_id ASC");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int product_id = rs.getInt("product_id");
+				String product_name = rs.getString("product_name");
+				double purchase_price = rs.getDouble("purchase_price");
+				double selling_price = rs.getDouble("selling_price");
+				int quantity = rs.getInt("quantity");
+				Product p = new Product(product_id, product_name, purchase_price, selling_price, quantity);
+				ret.add(p);
+
+			}
+			return ret;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }

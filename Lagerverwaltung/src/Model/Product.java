@@ -16,7 +16,7 @@ public class Product {
 	private int product_id;
 	private double purchase_price;
 	private double selling_price;
-	private String decription;
+	private String description;
 	private int quantity;
 	private byte[] product_picture;
 	//private Blob product_picture;
@@ -32,7 +32,7 @@ public class Product {
 		this.purchase_price = purchase_price;
 		this.selling_price = selling_price;
 		this.quantity = quantity;
-		this.decription = description;
+		this.description = description;
 		
 	}
 
@@ -42,7 +42,7 @@ public class Product {
 		this.purchase_price = purchase_price;
 		this.selling_price = selling_price;
 		this.quantity = quantity;
-		this.decription = description;
+		this.description = description;
 		this.product_picture = product_picture;
 	}
 	
@@ -80,12 +80,12 @@ public class Product {
 		this.selling_price = selling_price;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getQuantity() {
@@ -104,15 +104,12 @@ public class Product {
 
 	public void setProduct_picture(byte[] product_picture) {
 		this.product_picture = product_picture;
-	}
-
-	
-	
+	}	
 
 	@Override
 	public String toString() {
 		return "Product [product_name=" + product_name + ", product_id=" + product_id + ", purchase_price="
-				+ purchase_price + ", selling_price=" + selling_price + ", decription=" + decription + ", quantity="
+				+ purchase_price + ", selling_price=" + selling_price + ", description=" + description + ", quantity="
 				+ quantity + ", product_picture=" + product_picture + "]";
 	}
 	
